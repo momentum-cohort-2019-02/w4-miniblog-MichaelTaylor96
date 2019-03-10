@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class='blogger'>{% blogger.username %}'s Blogs</h1>
+    {% for blog in blogs %}
+        <div class="blog_head">
+            <h2 class="blog_title">{{ blog.title }}</h2>
+            <h3 class="blog_source">- {{ blog.author }}</h3>
+        </div>
+        <div class="blurb">
+            {{ blog.intro|truncatewords:20 }}
+        </div> 
+    {% endfor %}    
+{% endblock %}
