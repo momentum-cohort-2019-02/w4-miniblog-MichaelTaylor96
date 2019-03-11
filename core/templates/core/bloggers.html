@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    Bloggers
+{% endblock %}
+
 {% block content %}
     {% for blogger in bloggers %}
-        <div class="blog_head">
-            <h2 class="blog_title">
-                <a href="{{ user.get_absolute_url }}">{{ blogger.username }}</a>
-            </h2>
-            {% if blogger.first_name %}
-                <p class="blog_source">- {{ blogger.first_name }} {{ blogger.last_name }}</p>
-            {% else %}
-                <p>- Anonymous</p>
-            {% endif %}
+        <div class="item">
+            <div class="item_head">
+                <h2 class="item_title">
+                    <a href="{{ blogger.get_absolute_url }}">{{ blogger.user.username }}</a>
+                </h2>
+                {% if blogger.user.first_name %}
+                    <p class="item_source">- {{ blogger.user.first_name }} {{ blogger.user.last_name }}</p>
+                {% else %}
+                    <p class="item_source">- Anonymous</p>
+                {% endif %}
+            </div>
         </div>
     {% endfor %}
 {% endblock %}

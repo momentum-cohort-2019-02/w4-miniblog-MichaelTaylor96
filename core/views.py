@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Blog, Post, Blogger
-from django.contrib.auth.models import User
+from .models import Blog, Post, Writer
+# from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -17,10 +17,20 @@ def blogs(request):
     return render(request, 'core/blogs.html', context={'blogs': blogs})
 
 def bloggers(request):
-    bloggers = Blogger.objects.all()
+    bloggers = Writer.objects.all()
     return render(request, 'core/bloggers.html', context={'bloggers': bloggers})
 
 def blogger(request, pk):
-    blogger = Blogger.objects.filter(pk=pk)
-    blogs = Blog.objects.filter(author=blogger)
-    return render(request, 'core/blogger.html', context={"blogger": blogger, 'blogs': blogs})
+    blogger = Writer.objects.filter(pk=pk)
+    user = blogger[0].user
+    blogs = Blog.objects.filter(author=user)
+    return render(request, 'core/blogger.html', context={'blogger': blogger, 'blogs': blogs, 'user': user})
+
+def post(request, pk):
+    post = Post.objects.filter(pk=pk)[0]
+    return render(request, 'core/post.html', context={'post': post})
+
+def blog(request, pk):
+    blog = Blog.objects.filter(pk=pk)[0]
+    posts = Post.objects.filter(source=blog)
+    return render(request, 'core/blog.html', context={'blog': blog, 'posts': posts})

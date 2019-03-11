@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    All Blogs
+{% endblock %}
+
 {% block content %}
     {% for blog in blogs %}
-        <div class="blog_head">
-            <h2 class="blog_title">{{ blog.title }}</h2>
-            <h3 class="blog_source">- {{ blog.author }}</h3>
+        <div class="item">
+            <div class="item_head">
+                <h2 class="item_title">
+                    <a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a>
+                </h2>
+                <h3 class="item_source">- {{ blog.author }}</h3>
+            </div>
+            <div class="blurb">
+                {{ blog.intro|truncatewords:50 }}
+            </div> 
         </div>
-        <div class="blurb">
-            {{ blog.intro|truncatewords:20 }}
-        </div> 
     {% endfor %}
 {% endblock %}

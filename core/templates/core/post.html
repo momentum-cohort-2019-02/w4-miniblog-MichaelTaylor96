@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <p class="post_content">{{ post.content }}</p>
+    <footer class="signature">- {{ post.author.username }}</footer>
+{% endblock %}

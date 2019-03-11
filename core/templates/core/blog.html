@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    Recent Posts
+    {{ blog.name }}
 {% endblock %}
 
 {% block content %}
@@ -11,14 +11,13 @@
                 <h2 class="item_title">
                     <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                 </h2>
-                <p class="item_source">From {{ post.source.name }}</p>
             </div>
             <div class="blurb">
                 {{ post.content|truncatewords:50 }}
             </div>
             <div class="signature">
                 - {{ post.author }}
-            </div> 
-        </div> 
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}

@@ -5,10 +5,14 @@ from django.urls import reverse
 
 # Create your models here.
 
-class Blogger(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Writer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)   
+
     def get_absolute_url(self):
-        return reverse('Blogger', args=[int(self.pk)])
+        return reverse('Blogger', args=[int(self.id)])
+
+    def __str__(self):
+        return self.user.username
 
 class Blog(models.Model):
     author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
@@ -16,6 +20,9 @@ class Blog(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=250)
     intro = models.TextField(null=True)
+
+    def get_absolute_url(self):
+        return reverse('Blog', args=[int(self.id)])
 
     def __str__(self):
         return self.name
@@ -29,9 +36,11 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     sub_title = models.CharField(max_length=250, null=True)
 
+    def get_absolute_url(self):
+        return reverse('Post', args=[int(self.id)])
+
     def __str__(self):
         return self.title
-
 
 class Comment(models.Model):
     post = models.ForeignKey(to=Post, on_delete=models.CASCADE)

@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    {{ user.username }}'s Blogs
+{% endblock %}
+
 {% block content %}
-    <h1 class='blogger'>{% blogger.username %}'s Blogs</h1>
     {% for blog in blogs %}
-        <div class="blog_head">
-            <h2 class="blog_title">{{ blog.title }}</h2>
-            <h3 class="blog_source">- {{ blog.author }}</h3>
+        <div class="item">
+            <div class="item_head">
+                <h2 class="item_title">
+                    <a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a>
+                </h2>
+            </div>
+            <div class="blurb">
+                {{ blog.intro|truncatewords:50 }}
+            </div>
         </div>
-        <div class="blurb">
-            {{ blog.intro|truncatewords:20 }}
-        </div> 
     {% endfor %}    
 {% endblock %}

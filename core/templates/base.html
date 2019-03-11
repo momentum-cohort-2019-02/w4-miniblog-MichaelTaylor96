@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% block title %}<title>Blog Project</title>{% endblock%}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <header>
-        <h1>Michael's Blog Project</h1>
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-    <nav>
-        <div class="navchoice">
-            <a href="{% url 'Home' %}">Home</a>
-        </div>
-        <div class="navchoice">
-            <a href="{% url 'Recents' %}">Recent Posts</a>
-        </div>
-        <div class="navchoice">
-            <a href="{% url 'Bloggers' %}">Bloggers</a>
-        </div>
-    </nav>
-    <footer>
-        Thanks for visiting!
-    </footer>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        {% block title %}<title>Blog Project</title>{% endblock%}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
+    </head>
+    <body>
+        <div class="main">
+            <div class="content">
+                <h1 class="header">
+                    {% block head %}Michael's Blog Project{% endblock %}
+                </h1>
+                <main>
+                    {% block content %}
+                    {% endblock %}
+                </main>
+            </div>
+            <nav class="menu">
+                <a href="{% url 'Home' %}">
+                    <div class="navchoice">Home</div>
+                </a>
+                <a href="{% url 'Recents' %}">
+                    <div class="navchoice">Recent Posts</div>
+                </a>
+                <a href="{% url 'Bloggers' %}">
+                    <div class="navchoice">Bloggers</div>
+                </a>
+                <a href="{% url 'Blogs' %}">
+                    <div class="navchoice">All Blogs</div>
+                </a>
+            </nav>
+        </div> 
+    </body>
 </html>
